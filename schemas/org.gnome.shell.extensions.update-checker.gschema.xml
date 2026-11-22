@@ -147,7 +147,7 @@
     <key name="terminal-command" type="s">
       <default>'gnome-terminal --wait --'</default>
       <summary>Terminal launcher command</summary>
-      <description>Command prefix used to open a terminal to run the update script interactively (so password prompts work). The terminal launcher must remain running until its child command exits (GNOME Terminal uses --wait) so update completion and exit status can be tracked. Launchers that return as soon as a window opens cannot provide reliable lifecycle tracking.</description>
+      <description>Command prefix used to open a terminal to run an update interactively (so password prompts work), e.g. "kitty --wait --" or "gnome-terminal --wait --". The extension appends its own shell command and detects completion via a marker file, so a --wait flag is optional — it only controls whether the terminal window closes when done. Any terminal launcher that can run a shell command works.</description>
     </key>
 
     <key name="skip-on-metered" type="b">

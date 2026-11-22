@@ -27,6 +27,9 @@ import {
     clearTrackedStopTimeout,
     teardownTrackedUpdates,
     finalizeUpdateCompletion,
+    createUpdateMarkerPath,
+    buildMarkedCommand,
+    readUpdateMarker,
     getSourceConfigurationState,
     parseSourceTimeouts,
     parseExitCodeList,
@@ -873,6 +876,21 @@ async function main() {
         {invalidate: () => { invalidated++; }}),
         'destroyed indicator rejects completion finalization');
     assert(invalidated === 1, 'destroyed completion must not invalidate cache');
+
+    // #60: terminal-agnostic completion via a marker file.
+    const marker = createUpdateMarkerPath('Cargo', {tmpDir: '/tmp', nowMs: 1000, random: () => 0.5});
+    assert(marker.startsWith('/tmp/uc-update-Cargo-1000-'), 'marker path is unique and sanitized');
+    assert(createUpdateMarkerPath('a/b c', {tmpDir: '/tmp', nowMs: 1000, random: () => 0.5})
+        .includes('a_b_c'), 'unsafe characters in the key are sanitized');
+    const wrapped = buildMarkedCommand('doas dnf update -y', marker);
+    assert(wrapped.includes('doas dnf update -y; uc_rc=$?;') && wrapped.includes(marker),
+        'wrapped command writes its own exit code to the marker');
+    equal(readUpdateMarker(marker, {fileGetContents: () => [true, new TextEncoder().encode('42')]}), 42,
+        'marker exit status is parsed');
+    equal(readUpdateMarker(marker, {fileGetContents: () => [false, null]}), null,
+        'missing marker returns null (completion not yet signaled)');
+    equal(readUpdateMarker(marker, {fileGetContents: () => [true, new TextEncoder().encode('garbage')]}), null,
+        'malformed marker returns null');
 
     equal(getHighImpactUpdateCommands([
         {name: 'DNF', command: 'doas dnf upgrade -y'},
