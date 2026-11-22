@@ -7,7 +7,7 @@
     "50",
     "51"
   ],
-  "url": "https://github.com/SakibShahariar/update-checker-gnome",
+  "url": "https://github.com/SakibShahariar/update-checker-fedora",
   "version": 9,
   "settings-schema": "org.gnome.shell.extensions.update-checker",
   "license": "GPL-3.0-only"

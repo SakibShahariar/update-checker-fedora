@@ -41,7 +41,7 @@ gnome-extensions enable update-checker-fedora@SakibShahariar.github.io
 ### From Git
 
 ```sh
-git clone https://github.com/SakibShahariar/update-checker-gnome.git ~/.local/share/gnome-shell/extensions/update-checker-fedora@SakibShahariar.github.io
+git clone https://github.com/SakibShahariar/update-checker-fedora.git ~/.local/share/gnome-shell/extensions/update-checker-fedora@SakibShahariar.github.io
 glib-compile-schemas ~/.local/share/gnome-shell/extensions/update-checker-fedora@SakibShahariar.github.io/schemas/
 gnome-extensions enable update-checker-fedora@SakibShahariar.github.io
 ```
