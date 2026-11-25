@@ -100,15 +100,15 @@
 /* — Section header — PkgUpdateWidget.qml:293 accent + badge + button row */
 .update-checker-section-header {
     spacing: 8px;
-    padding: 0 2px;
-    min-height: 22px;
+    padding: 2px 2px;
+    min-height: 28px;
 }
 
 /* Thin timing/cached subtitle below each source row — rendered as a separate
    invisible menu item so it stacks without stealing hover focus from the
    action row above it. */
 .update-checker-subtitle {
-    padding: 0 4px;
+    padding: 2px 4px;
 }
 
 /* Muted secondary text inside a thin subtitle row (timing/cached state,
@@ -181,8 +181,8 @@
     border-radius: 12px;
     border: 1px solid rgba(71, 71, 72, 0.45); /* outline_variant @ 45% — Matugen */
     background-color: transparent;
-    padding: 2px 4px;
-    margin-bottom: 6px;
+    padding: 4px;
+    margin-bottom: 10px;
     transition-duration: 200ms;
 }
 
@@ -193,7 +193,7 @@
 }
 
 .update-checker-package-row {
-    padding: 3px 10px;
+    padding: 5px 10px;
     spacing: 8px;
     transition-duration: 150ms;
 }
@@ -271,11 +271,12 @@
    rounded, inset rows instead of default flat list items. Scoped to this menu only.
    Override the theme's 9px vertical padding too (e.g. Material-Gnome sets
    `padding: 9px 12px`): leaving it in place stacks ~18px of dead space on every
-   header, subtitle and container row and makes the popup needlessly tall. */
+   header, subtitle and container row and makes the popup needlessly tall.
+   Keep 4px (not 1px) so rows stay comfortably tappable. */
 .update-checker-menu .popup-menu-item {
     border-radius: 12px;
     margin: 1px 4px;
-    padding: 1px 8px;
+    padding: 4px 8px;
     border-color: transparent;
     border-width: 0;
 }
@@ -293,7 +294,7 @@
    their content stays aligned with the rest of the menu. */
 .update-checker-menu .update-checker-info-row {
     margin: 1px 4px;
-    padding: 1px 8px;
+    padding: 4px 8px;
 }
 .update-checker-menu .update-checker-info-row:hover,
 .update-checker-menu .update-checker-info-row:focus {
